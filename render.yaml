@@ -1,5 +1,4 @@
 services:
-  # The Python Backend
   - type: web
     name: raincast-backend
     env: python
@@ -7,10 +6,8 @@ services:
     buildCommand: "pip install -r requirements.txt"
     startCommand: "gunicorn app:app"
 
-  # The React Frontend
-  - type: static_site  # <-- FIX: Changed from 'static'
+  - type: static_site
     name: raincast-frontend
-    # env: static      # <-- FIX: This line has been removed
     rootDir: frontend
     buildCommand: "npm install && npm run build"
     publishDirectory: build
