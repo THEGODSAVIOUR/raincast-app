@@ -3,7 +3,8 @@ from flask_cors import CORS
 import os
 
 app = Flask(__name__)
-CORS(app)
+# FINAL FIX: Be specific about the allowed origin for CORS
+cors = CORS(app, origins="https://raincast-frontend.onrender.com")
 
 def calculate_relative_humidity(air_temp, dew_point):
     specific_humidity = 6.11 * (10 ** ((7.5 * dew_point) / (237.3 + dew_point)))
