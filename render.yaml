@@ -1,0 +1,22 @@
+services:
+  # The Python Backend
+  - type: web
+    name: raincast-backend
+    env: python
+    rootDir: backend
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app"
+
+  # The React Frontend
+  - type: static
+    name: raincast-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    publishDirectory: build
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: raincast-backend
+          property: url
