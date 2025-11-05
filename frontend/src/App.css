@@ -1,10 +1,31 @@
 /* src/App.css */
+
 :root {
-  --primary-color: #007bff; --primary-dark: #0056b3; --high-prediction-color: #007bff; --low-prediction-color: #f39c12; --highlight-color: rgba(26, 178, 128, 0.2); --background-start: #d4e7f8; --background-end: #f5faff; --card-background: rgba(255, 255, 255, 0.45); --text-color: #334155; --heading-color: #0b3c6b; --border-color: rgba(200, 215, 230, 0.8); --shadow-color: rgba(100, 120, 150, 0.1);
+  --primary-color: #007aff;
+  --primary-dark: #005ecb;
+  --text-color: #34495e;
+  --heading-color: #1a2c47;
+  --border-color: #dbe4f0;
+  --card-background: rgba(255, 255, 255, 0.6);
+  --shadow-color: rgba(100, 120, 150, 0.15);
+  --background-start: #e0f2ff;
+  --background-end: #fafcff;
 }
+
 body {
-  margin: 0; padding: 20px; font-family: "Poppins", sans-serif; background: linear-gradient(135deg, var(--background-start), var(--background-end)); background-attachment: fixed; color: var(--text-color); overflow-x: hidden;
+  margin: 0;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  background: radial-gradient(circle at top left, var(--background-start), var(--background-end));
+  background-attachment: fixed;
+  color: var(--text-color);
+  overflow-x: hidden;
 }
+
 .App {
-  display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 20px 0;
 }
