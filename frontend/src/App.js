@@ -4,14 +4,20 @@ import "./App.css";
 import RainfallForm from "./components/RainfallForm";
 
 function App() {
+  // Create an array of 50 elements to map into raindrop spans
+  const raindrops = Array.from({ length: 50 });
+
   return (
     <div className="App">
-      {/* This new container will hold the animated raindrops */}
       <div className="background-container">
-        <div className="rain"></div>
+        {/* The container for all our raindrop elements */}
+        <div className="rain">
+          {raindrops.map((_, idx) => (
+            <span key={idx} className="raindrop"></span>
+          ))}
+        </div>
       </div>
 
-      {/* This container ensures your form stays on top of the background */}
       <div className="content-container">
         <RainfallForm />
       </div>
