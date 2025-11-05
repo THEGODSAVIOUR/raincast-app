@@ -60,12 +60,13 @@ const RainfallForm = () => {
       const data = await response.json();
       setSortedResults(data.sorted_results || []); setHighest(data.highest || null); setPrediction(data.prediction || "");
     } catch (err) {
-      // A more descriptive error message for the user
       setError("Failed to fetch. Please check the backend connection.");
     } finally {
       setLoading(false);
     }
   };
+
+  const chartData = [...sortedResults].sort((a, b) => a.air_temp - b.air_temp);
 
   return (
     <div className="container">
@@ -94,7 +95,6 @@ const RainfallForm = () => {
         {error && <p className="error">{error}</p>}
       </form>
 
-      {/* START OF THE UPDATED RESULTS SECTION */}
       {sortedResults.length > 0 && (
         <div className="result-section">
           <div className={`prediction-badge ${prediction.includes("High") ? "high" : "low"}`}>
@@ -126,16 +126,17 @@ const RainfallForm = () => {
               <h3>Humidity Trend</h3>
               <div className="chart-container">
                 <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={sortedResults} margin={{ top: 5, right: 30, left: 0, bottom: 20 }}>
+                  {/* THE ONLY CHANGE IS ON THE NEXT LINE: left margin is now 30 */}
+                  <LineChart data={chartData} margin={{ top: 5, right: 30, left: 30, bottom: 20 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.1)"/>
-                    <XAxis dataKey="air_temp">
+                    <XAxis dataKey="air_temp" type="number" domain={['dataMin', 'dataMax']}>
                       <Label value="Air Temperature (°C)" offset={-15} position="insideBottom"/>
                     </XAxis>
                     <YAxis>
                       <Label value="Humidity (%)" angle={-90} position="insideLeft" style={{ textAnchor: "middle" }}/>
                     </YAxis>
                     <Tooltip />
-                    <Line type="monotone" dataKey="relative_humidity" stroke={prediction.includes("High") ? "var(--high-prediction-color)" : "var(--low-prediction-color)"} strokeWidth={3} dot={{ r: 5 }}/>
+                    <Line type="monotone" dataKey="relative_humidity" stroke={prediction.includes("High") ? "var(--primary-color)" : "#f39c12"} strokeWidth={3} dot={{ r: 5 }}/>
                   </LineChart>
                 </ResponsiveContainer>
               </div>
@@ -143,7 +144,6 @@ const RainfallForm = () => {
           </div>
         </div>
       )}
-      {/* END OF THE UPDATED RESULTS SECTION */}
     </div>
   );
 };
