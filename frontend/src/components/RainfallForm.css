@@ -3,7 +3,7 @@
 /* --- Main Container --- */
 .container {
   width: 100%;
-  max-width: 650px; /* Narrower for a better vertical feel */
+  max-width: 950px; /* Wider to accommodate side-by-side results */
   background: var(--card-background);
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.5);
@@ -20,7 +20,6 @@
   font-weight: 700;
   color: var(--heading-color);
   margin-bottom: 2.5rem;
-  /* Simple and clean title is often better */
 }
 
 /* --- Form & Inputs --- */
@@ -62,7 +61,7 @@
 /* --- Input Rows (Stack Layout) --- */
 .reading-inputs {
   display: flex;
-  flex-direction: column; /* This creates the vertical stack */
+  flex-direction: column;
   gap: 1rem;
   margin-bottom: 2.5rem;
   animation: fadeIn 0.5s ease-out forwards;
@@ -71,7 +70,7 @@
 .reading-row {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Spreads out the content */
+  justify-content: space-between;
   gap: 1rem;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 16px;
@@ -136,7 +135,86 @@
   opacity: 0;
   transform: translateY(20px);
   animation: fadeIn 0.6s ease-out forwards;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
 }
+
+/* --- START: NEW AND UPDATED STYLES FOR RESULTS --- */
+
+.prediction-badge {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+.prediction-badge.high { background-color: var(--primary-color); }
+.prediction-badge.low { background-color: #f39c12; }
+
+.results-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 2rem;
+  text-align: left;
+  align-items: flex-start;
+}
+
+.results-data h3, .results-chart h3 {
+  color: var(--heading-color);
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+th, td {
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+  text-align: center;
+}
+
+th {
+  background: rgba(230, 239, 255, 0.7);
+  font-size: 0.9rem;
+  color: var(--primary-dark);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:nth-child(even) {
+  background-color: #f9fcff;
+}
+
+.highlight {
+  background-color: #d1f7ea !important;
+  font-weight: 700;
+  color: #0d6e4b;
+}
+
+/* This is the fix for the invisible chart */
+.chart-container {
+  width: 100%;
+  height: 300px; /* Giving the container a height */
+}
+
+/* --- END: NEW AND UPDATED STYLES FOR RESULTS --- */
 
 @keyframes fadeIn {
   to {
@@ -146,6 +224,12 @@
 }
 
 /* --- Responsive Design --- */
+@media (max-width: 850px) {
+  .results-content {
+    grid-template-columns: 1fr; /* Stack on smaller screens */
+  }
+}
+
 @media (max-width: 600px) {
   .container {
     padding: 2rem 1.5rem;
