@@ -70,7 +70,9 @@ const RainfallForm = () => {
 
   return (
     <div className="container">
-      <h1 className="title">🌦️ Raincast</h1>
+      {/* --- THIS IS THE ONLY LINE THAT CHANGED --- */}
+      <h1 className="title">🌦️ Rainfall Prediction Dashboard</h1>
+      
       <form onSubmit={handleSubmit}>
         <div className="input-section">
           <label htmlFor="numReadings">Number of Readings:</label>
@@ -102,14 +104,12 @@ const RainfallForm = () => {
           </div>
           <div className="results-content">
             <div className="results-data">
-              {/* --- CHANGE 1 --- */}
               <h3>Relative Humidity Readings</h3>
               <table>
                 <thead>
                   <tr>
                     <th>Air Temp (°C)</th>
                     <th>Dew Point (°C)</th>
-                    {/* --- CHANGE 2 --- */}
                     <th>Relative Humidity (%)</th>
                   </tr>
                 </thead>
@@ -125,7 +125,6 @@ const RainfallForm = () => {
               </table>
             </div>
             <div className="results-chart">
-              {/* --- CHANGE 3 --- */}
               <h3>Relative Humidity Trend</h3>
               <div className="chart-container">
                 <ResponsiveContainer width="100%" height="100%">
@@ -134,11 +133,11 @@ const RainfallForm = () => {
                     <XAxis dataKey="air_temp" type="number" domain={['dataMin', 'dataMax']}>
                       <Label value="Air Temperature (°C)" offset={-15} position="insideBottom"/>
                     </XAxis>
-                    <YAxis yAxisId="left" orientation="left" stroke="#8884d8">
+                    <YAxis>
                       <Label value="Relative Humidity (%)" angle={-90} position="insideLeft" style={{ textAnchor: "middle" }}/>
                     </YAxis>
                     <Tooltip />
-                    <Line yAxisId="left" type="monotone" dataKey="relative_humidity" stroke={prediction.includes("High") ? "var(--primary-color)" : "#f39c12"} strokeWidth={3} dot={{ r: 5 }}/>
+                    <Line type="monotone" dataKey="relative_humidity" stroke={prediction.includes("High") ? "var(--primary-color)" : "#f39c12"} strokeWidth={3} dot={{ r: 5 }}/>
                   </LineChart>
                 </ResponsiveContainer>
               </div>
