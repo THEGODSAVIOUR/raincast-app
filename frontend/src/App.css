@@ -19,21 +19,26 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: var(--background-end);
   color: var(--text-color);
-  /* The line "overflow: hidden;" has been REMOVED from here */
+  overflow: hidden; /* This is now correct, it prevents double scrollbars */
 }
 
+/* --- KEY CHANGE: Making the content container the scrollable area --- */
 .App .content-container {
   position: relative;
   z-index: 2;
   width: 100%;
+  height: 100vh; /* Set a fixed height to the viewport height */
+  overflow-y: auto; /* Make THIS element scrollable, not the whole page */
+  padding: 40px 20px; /* Added more padding for better spacing */
+  box-sizing: border-box; /* Ensures padding is included in the height */
+
+  /* Flex properties to center the form */
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  min-height: 100vh;
-  padding: 20px 0;
 }
 
-/* --- START: SLANTED RAIN ANIMATION --- */
+/* --- The background animation styles remain the same --- */
 
 .background-container {
   position: fixed;
@@ -43,7 +48,7 @@ body {
   height: 100%;
   z-index: 1;
   background: linear-gradient(to bottom, var(--background-start), var(--background-end));
-  overflow: hidden; /* This is the correct place for this rule */
+  overflow: hidden;
 }
 
 .rain {
@@ -83,5 +88,3 @@ body {
 .raindrop:nth-child(10n + 8) { left: 80%; animation-delay: 0.9s; animation-duration: 1.9s; opacity: 0.6; }
 .raindrop:nth-child(10n + 9) { left: 90%; animation-delay: 0.5s; animation-duration: 1.5s; }
 .raindrop:nth-child(10n + 10){ left: 100%;animation-delay: 0.2s; animation-duration: 1.2s; opacity: 0.7; }
-
-/* --- END: SLANTED RAIN ANIMATION --- */
