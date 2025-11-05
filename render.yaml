@@ -8,9 +8,9 @@ services:
     startCommand: "gunicorn app:app"
 
   # The React Frontend
-  - type: static
+  - type: static_site  # <-- FIX: Changed from 'static'
     name: raincast-frontend
-    env: static
+    # env: static      # <-- FIX: This line has been removed
     rootDir: frontend
     buildCommand: "npm install && npm run build"
     publishDirectory: build
